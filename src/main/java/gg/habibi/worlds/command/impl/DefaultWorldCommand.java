@@ -14,6 +14,7 @@ public class DefaultWorldCommand extends AbstractWorldCommand {
         super("world", "realm");
 
         add(new WorldSethomeCommand(messageConf));
+        add(new WorldHomeCommand(messageConf));
     }
 
     @Override public @NotNull String[] getHelpMessage() {
