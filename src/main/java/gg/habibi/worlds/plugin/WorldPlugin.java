@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import gg.habibi.worlds.Worlds;
 import gg.habibi.worlds.api.*;
 import gg.habibi.worlds.command.WorldCommand;
+import gg.habibi.worlds.command.impl.DefaultWorldCommand;
 import gg.habibi.worlds.config.MessageConf;
 import gg.habibi.worlds.config.SettingConf;
 import gg.habibi.worlds.event.WorldLoadEvent;
@@ -49,7 +50,8 @@ public class WorldPlugin extends ExtendedJavaPlugin {
         bindModule(new LagListener(settingConf));
 
         // Commands \\
-        bindModule(new WorldCommand(messageConf));
+        final WorldCommand worldCommand = new DefaultWorldCommand(messageConf);
+        worldCommand.getCommand().registerAndBind(this, worldCommand.getAliases());
     }
 
     @Override protected void disable() {

@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class Worlds {
 
@@ -20,6 +21,10 @@ public class Worlds {
     static {
         worldRegistry = new SimpleWorldRegistry();
         chunkRegistry = new SimpleChunkRegistry();
+    }
+
+    public static @NotNull Optional<World> from(@NotNull UUID uuid) {
+        return worldRegistry.get(uuid);
     }
 
     public static @NotNull Optional<World> from(@NotNull LivingEntity entity) {

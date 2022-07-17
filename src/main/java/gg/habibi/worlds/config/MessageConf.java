@@ -12,6 +12,7 @@ public class MessageConf extends TomlConfig {
 
 
     public String worldCreationMessage = "&aYour world has been created.";
+    public String worldSetSpawnMessage = "&aYou have set your worlds spawn!";
 
     public String playerTeleportWorldSpawn = "&aTeleporting you to your world...";
 
