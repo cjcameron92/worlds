@@ -49,10 +49,11 @@ public class SimpleWorldApi implements WorldApi {
         return Promise.supplyingAsync(() -> {
             final ChunkPosition chunkPosition = worldCache.getLastChunk();
             worldCache.setLastChunk(chunkPosition.add(settingConf.spacePerWorld, settingConf.spacePerWorld));
+            final int size = (int) Math.floor(settingConf.worldChunkSize / 2D);
             final ChunkRegion chunkRegion = ChunkRegion.
                     of(ChunkPosition.
-                            of(chunkPosition.getX() + settingConf.worldChunkSize, chunkPosition.getZ() + settingConf.worldChunkSize, settingConf.defaultWorld), ChunkPosition.
-                            of(chunkPosition.getX() - settingConf.worldChunkSize, chunkPosition.getZ() - settingConf.worldChunkSize, settingConf.defaultWorld));
+                            of(chunkPosition.getX() + size, chunkPosition.getZ() + size, settingConf.defaultWorld), ChunkPosition.
+                            of(chunkPosition.getX() - size, chunkPosition.getZ() - size, settingConf.defaultWorld));
 
             final World world = new SimpleWorld(uuid, name, chunkRegion);
             Worlds.getWorldRegistry().register(uuid, world);

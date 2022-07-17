@@ -24,7 +24,7 @@ import java.util.UUID;
 
 import static gg.habibi.worlds.Worlds.*;
 
-public class PlayerListener implements TerminableModule {
+public class  PlayerListener implements TerminableModule {
 
     private final WorldApi worldApi;
     private final MessageConf messageConf;
@@ -47,9 +47,14 @@ public class PlayerListener implements TerminableModule {
 
         }).bindWith(consumer);
 
+        Events.subscribe(PlayerRespawnEvent.class).handler(event -> {
+            final Player player = event.getPlayer();
+            from(player.getUniqueId()).ifPresent(world -> event.setRespawnLocation(world.getSpawn().toLocation()));
+            Schedulers.sync().runLater(() -> from(player).ifPresent(world -> BorderUtil.sendBorder(world, player)), 1L);
+        }).bindWith(consumer);
+
         Events.subscribe(PlayerJoinEvent.class).handler(event -> {
             final Player player = event.getPlayer();
-
             Schedulers.sync().runLater(() -> from(player).ifPresent(world -> BorderUtil.sendBorder(world, player)), 1L);
         }).bindWith(consumer);
 

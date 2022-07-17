@@ -8,10 +8,7 @@ import gg.habibi.worlds.command.impl.DefaultWorldCommand;
 import gg.habibi.worlds.config.MessageConf;
 import gg.habibi.worlds.config.SettingConf;
 import gg.habibi.worlds.event.WorldLoadEvent;
-import gg.habibi.worlds.listener.EntityListener;
-import gg.habibi.worlds.listener.LagListener;
-import gg.habibi.worlds.listener.PlayerListener;
-import gg.habibi.worlds.listener.WorldListener;
+import gg.habibi.worlds.listener.*;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.lucko.helper.serialize.GsonStorageHandler;
 import me.lucko.helper.toml.TomlConfigRegistry;
@@ -48,6 +45,7 @@ public class WorldPlugin extends ExtendedJavaPlugin {
         bindModule(new WorldListener(messageConf, settingConf));
         bindModule(new EntityListener(messageConf));
         bindModule(new LagListener(settingConf));
+        bindModule(new SettingListener(worldApi, messageConf, settingConf));
 
         // Commands \\
         final WorldCommand worldCommand = new DefaultWorldCommand(messageConf);

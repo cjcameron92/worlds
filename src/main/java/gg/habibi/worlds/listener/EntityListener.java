@@ -7,7 +7,9 @@ import me.lucko.helper.terminable.module.TerminableModule;
 import me.lucko.helper.text3.Text;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +29,15 @@ public class EntityListener implements TerminableModule {
             final Entity entity = event.getEntity();
             if (!(entity instanceof Player)) {
                 if (from(entity.getLocation()).isEmpty()) {
+                    event.setCancelled(true);
+                }
+            }
+        }).bindWith(consumer);
+
+        Events.subscribe(CreatureSpawnEvent.class).handler(event -> {
+            final LivingEntity entity = event.getEntity();
+            if (!(entity instanceof Player)) {
+                if (from(entity).isEmpty()) {
                     event.setCancelled(true);
                 }
             }

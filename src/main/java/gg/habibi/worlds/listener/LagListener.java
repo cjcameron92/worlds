@@ -21,7 +21,7 @@ public class LagListener implements TerminableModule {
     }
 
     @Override public void setup(@NotNull TerminableConsumer consumer) {
-        Schedulers.async().runRepeating(() -> Helper.world(settingConf.defaultWorld).ifPresent(bukkitWorld -> {
+        Schedulers.sync().runRepeating(() -> Helper.world(settingConf.defaultWorld).ifPresent(bukkitWorld -> {
             for (Entity entity : bukkitWorld.getEntities()) {
                 if (from(entity.getLocation()).isEmpty()) {
                     entity.remove();

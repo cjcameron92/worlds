@@ -7,7 +7,9 @@ import org.jetbrains.annotations.NotNull;
 public class DefaultWorldCommand extends AbstractWorldCommand {
 
     private final String[] helpMessage = new String[] {
-            "&a&lWorld Commands"
+            "&a&lWorld Commands",
+            "&7/world home",
+            "&7/world sethome"
     };
 
     public DefaultWorldCommand(@NotNull MessageConf messageConf) {
@@ -15,6 +17,10 @@ public class DefaultWorldCommand extends AbstractWorldCommand {
 
         add(new WorldSethomeCommand(messageConf));
         add(new WorldHomeCommand(messageConf));
+        add(new WorldTrustCommand());
+        add(new WorldUntrustCommand());
+        add(new WorldSettingCommand());
+        add(new WorldChatCommand());
     }
 
     @Override public @NotNull String[] getHelpMessage() {

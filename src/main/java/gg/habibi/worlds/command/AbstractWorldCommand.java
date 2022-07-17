@@ -25,6 +25,7 @@ public abstract class AbstractWorldCommand implements WorldCommand {
                 }
             }
             context.reply(getHelpMessage());
+
         });
     }
 
