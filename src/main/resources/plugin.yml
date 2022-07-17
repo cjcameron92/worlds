@@ -1,0 +1,5 @@
+main: gg.habibi.worlds.plugin.WorldPlugin
+version: 1.0
+name: habibiWorlds
+api-version: 1.13
+depend: [helper]

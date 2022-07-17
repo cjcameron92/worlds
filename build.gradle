@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
+}
+
+group 'gg.habibi'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = uri("https://papermc.io/repo/repository/maven-public/")
+    }
+
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    implementation("me.lucko:helper-toml:1.0.0")
+    compileOnly('me.lucko:helper:5.6.10')
+}
+
+
+shadowJar {
+    archivesBaseName = "worlds"
+    archiveFileName.set("worlds.jar")
+
+    destinationDir = file('server/plugins/')
+    classifier = null
+    minimize()
+    dependencies {
+        manifest {
+            attributes("Main-Class": "gg.habibi.worlds.plugin.WorldPlugin")
+        }
+    }
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
